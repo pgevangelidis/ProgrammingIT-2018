@@ -11,6 +11,7 @@ public class ModelVehicle {
 	private Statistics stats;
 	private int row,col;
 	private boolean alarm;
+	private String line;
 	
 	public ModelVehicle(Grid g, Statistics s)
 	{
@@ -56,6 +57,12 @@ public class ModelVehicle {
 	public void addTime(double t)
 	{
 		stats.addTime(t);
+	}
+	
+	public String printStats()
+	{
+		line = stats.printStats();
+		return line;
 	}
 	
 	// The grid rows and columns are obtained from here

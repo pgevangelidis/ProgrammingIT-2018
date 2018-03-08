@@ -91,10 +91,13 @@ public class VehicleSpec2 extends Thread{
 			}
 			alarm = mdVeh.getAlarm();
 		}
+		
+		String line = mdVeh.printStats();
+		
+		System.out.println(line);
 
 		System.err.println("...Please wait...");
-		
-		getStackTrace();
+		System.err.println("There are some threads still running.");
 		
 		if(alarm==true)
 		{

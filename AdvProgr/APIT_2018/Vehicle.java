@@ -82,6 +82,8 @@ public class Vehicle extends Thread{
 		}
 
 		System.err.println("...Please wait...");
+		System.err.println("There are some threads still running.");
+		
 		if(alarm==true)
 		{
 			try {

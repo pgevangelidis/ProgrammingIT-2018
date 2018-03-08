@@ -30,7 +30,8 @@ public class APSpec1{
 		Vehicle veh = new Vehicle(mdVeh, destination);
 
 		veh.generateVehicle();
-
+		
+		System.out.println("Great News. All threads have finished");
 		System.out.println("End of simulation.");
 
 	}

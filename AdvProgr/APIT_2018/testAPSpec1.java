@@ -41,7 +41,7 @@ public class testAPSpec1{
 		System.out.println("ncounter: " + northCounter + " wcounter: "+ westCounter);
 
 		/*==============
-		 * This test is for the speed random generator
+		 * This test is for the speed random generator spec 2
 		 * ================*/
 		int randomSpeed = 0;
 		int generate = 0;
@@ -63,6 +63,10 @@ public class testAPSpec1{
 		}
 		//System.out.println("Min speed: "+min+" Max speed: "+max);
 
+		/*===========================================================*/
+		// This test is for the random column or number
+		/*===========================================================*/
+		
 		/*int r = 10;
 		max=0;
 		min=100;
@@ -77,11 +81,21 @@ public class testAPSpec1{
 		}
 		System.out.println("Min row lane: "+min+" Max row lane: "+max);*/
 
+		/*===========================================================*/
+		// This test is for the random direction
+		/*===========================================================*/
+		
 		/*for(int j=0; j<50; j++)
 		{
 			int direction = (int) Math.round(Math.random());
 			System.out.println(direction);
 		}*/
+		
+		
+		/*===========================================================*/
+		// This test is for the random direction
+		/*===========================================================*/
+		
 		
 	/*	boolean alarm = true;
 		long t0 = System.currentTimeMillis();
@@ -97,6 +111,10 @@ public class testAPSpec1{
 	      }
 	      alarm = false;
 	    }*/
+		
+		/*===========================================================*/
+		// This test is for the speed regulator
+		/*===========================================================*/
 		
 		/*for(int i=0; i<=540; i++)
 		{

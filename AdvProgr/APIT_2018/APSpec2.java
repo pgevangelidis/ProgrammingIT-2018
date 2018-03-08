@@ -24,10 +24,11 @@ public class APSpec2{
 
 		veh.generateVehicle();
 		
+		System.out.println("Great News. All threads have finished");
 		System.out.println("End of simulation.");
 		
-		String line = stats.printStats();
+		//String line = stats.printStats();
 		
-		System.out.println(line);
+		//System.out.println(line);
 	}
 }
