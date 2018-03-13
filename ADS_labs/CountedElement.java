@@ -1,5 +1,3 @@
-package Assessment;
-
 public class CountedElement<E extends Comparable<E>> implements Comparable<CountedElement<E>> {
 	private E element;
 	private int count;
@@ -47,8 +45,15 @@ public class CountedElement<E extends Comparable<E>> implements Comparable<Count
 	
 	public int compareTo(CountedElement<E> sC1) {
     
-		//to complete
-		return 1;
+		if(element.compareTo(sC1.element)>0)
+			return 1;
+		else if(element.compareTo(sC1.element)==0)
+		{
+			sC1.count++;
+			return 0;	
+		}						
+		else
+			return -1;
 	}
 
 }

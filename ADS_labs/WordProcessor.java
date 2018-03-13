@@ -1,6 +1,3 @@
-package Assessment;
-
-
 //import classes for file input - scanner etc.
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,20 +7,25 @@ import java.util.TreeSet;
 //import implementing set (eg. TreeSet)
 
 
-
-
 public class WordProcessor {
 	private static <E> String displaySet(Set<E> inputSet){
 		//implement this static method to create a
 		// String representation of set - 5 comma separated elements per line
 		// assume that type E has a toString method
-		String line = "(";
+		String line = "";
+		int counter = 0;
 		
-		for(E elem : inputSet) 
-			line += elem + ",";
-		
-		line+=")";
-
+		for(E elem : inputSet)
+		{
+			line += " (" + elem + ")" + ",";
+			if(counter==4)
+			{
+				line += "\n";
+				counter = 0;
+			}else
+				counter ++;
+		}
+			
 		return line;
 	}
 
@@ -34,32 +36,38 @@ public class WordProcessor {
 		//create a set of type String called wordSet
 		Set<String> wordSet = new TreeSet<String>();
 		//create a set of type CountedElement<String> called countedWordSet 
-		CountedElement<String> countedWordSet = new TreeSet<String>();
+		Set<CountedElement<String>> countedWordSet = new TreeSet<CountedElement<String>>();
 		
-		String[] files = {"file0.txt","file1.txt","file2.txt"};
-		
-		
-		for (int i=0; i< 1; i++)
+		String word = "";
+		int counter = 1;
+
+		for (int i=0; i< args.length-0; i++)
 			{
 				try{
-					FileReader reader = new FileReader(files[i]);
+					FileReader reader = new FileReader(args[i]);
 					Scanner readfile = new Scanner(reader);
 				
 					while(readfile.hasNext())
 					{
-						CountedElement<String> countedWordSet = new CountedElement<String>(readfile.next());
-												
-						if(! wordSet.contains(countedWordSet.getElement()))
+						
+						word = readfile.next();
+						if(countedWordSet.size()==0)
+							counter=0;
+						else
+							counter=1;
+						CountedElement<String> elem = new CountedElement<String>(word,counter);	
+						
+						
+						if(! wordSet.contains(word))
 						{
-							System.err.println(countedWordSet.toString());
-							
-							
-							wordSet.add(countedWordSet);
-							
+							//System.err.println(word);							
+							wordSet.add(word);			
+							countedWordSet.add(elem);
+					
 						}							
 						else
-						{
-							
+						{						
+							countedWordSet.add(elem);
 						}
 					}
 					
@@ -79,7 +87,7 @@ public class WordProcessor {
 		//        increment numeric part of element in countedWordSet containing w
 		
 
-	System.out.println(displaySet(wordSet));
+	System.out.println(displaySet(countedWordSet));
 
 	}
 }
