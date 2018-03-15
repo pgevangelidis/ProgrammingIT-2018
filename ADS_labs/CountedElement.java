@@ -12,7 +12,7 @@ public class CountedElement<E extends Comparable<E>> implements Comparable<Count
 	public CountedElement(E e){
 		//constructor - to complete
 		element = e;
-		this.count = 0;
+		this.count = 1;
 	}
 
 	//add getters and setters
@@ -39,7 +39,7 @@ public class CountedElement<E extends Comparable<E>> implements Comparable<Count
 	//add toString() method
 	public String toString()
 	{
-		String pair = "" + getElement() + "," + getCount();
+		String pair = "(" + getElement() + "," + getCount() + ")";
 		return pair;
 	}
 	
@@ -48,10 +48,7 @@ public class CountedElement<E extends Comparable<E>> implements Comparable<Count
 		if(element.compareTo(sC1.element)>0)
 			return 1;
 		else if(element.compareTo(sC1.element)==0)
-		{
-			sC1.count++;
-			return 0;	
-		}						
+			return 0;							
 		else
 			return -1;
 	}

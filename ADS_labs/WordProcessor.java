@@ -17,7 +17,7 @@ public class WordProcessor {
 		
 		for(E elem : inputSet)
 		{
-			line += " (" + elem + ")" + ",";
+			line += "" + elem + ", ";
 			if(counter==4)
 			{
 				line += "\n";
@@ -39,8 +39,16 @@ public class WordProcessor {
 		Set<CountedElement<String>> countedWordSet = new TreeSet<CountedElement<String>>();
 		
 		String word = "";
-		int counter = 1;
+		int  counter = 0;
 
+		//for each input file (assume 3 arguments, each the name of a file)
+		//  for each word w
+		//     if wordset doesnt contain w:
+		//        add w to wordset
+	    //        add new element to countedWordSet
+		//     else
+		//        increment numeric part of element in countedWordSet containing w
+		
 		for (int i=0; i< args.length-0; i++)
 			{
 				try{
@@ -51,23 +59,22 @@ public class WordProcessor {
 					{
 						
 						word = readfile.next();
-						if(countedWordSet.size()==0)
-							counter=0;
-						else
-							counter=1;
-						CountedElement<String> elem = new CountedElement<String>(word,counter);	
-						
+						CountedElement<String> elem = new CountedElement<String>(word);
 						
 						if(! wordSet.contains(word))
-						{
-							//System.err.println(word);							
-							wordSet.add(word);			
+						{							
+							wordSet.add(word);				
 							countedWordSet.add(elem);
 					
 						}							
 						else
 						{						
-							countedWordSet.add(elem);
+							counter = ((TreeSet<CountedElement<String>>) countedWordSet).ceiling(elem).getCount();
+							
+							CountedElement<String> incr = new CountedElement<String>(word,(counter+1));
+							
+							countedWordSet.remove(elem);
+							countedWordSet.add(incr);						
 						}
 					}
 					
@@ -78,14 +85,7 @@ public class WordProcessor {
 					System.err.println("File not found.");
 				}		
 			}
-		//for each input file (assume 3 arguments, each the name of a file)
-		//  for each word w
-		//     if wordset doesnt contain w:
-		//        add w to wordset
-	    //        add new element to countedWordSet
-		//     else
-		//        increment numeric part of element in countedWordSet containing w
-		
+				
 
 	System.out.println(displaySet(countedWordSet));
 
