@@ -1,23 +1,24 @@
-//import classes for file input - scanner etc.
 import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeSet;
-//import implementing set (eg. TreeSet)
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.Scanner;
 
 
-public class WordProcessor {
-	private static <E> String displaySet(Set<E> inputSet){
+public class WordProcessor2 {
+	private static <E> String displaySet(BSTBag<CountedElement<String>> inputSet){
 		//implement this static method to create a
 		// String representation of set - 5 comma separated elements per line
 		// assume that type E has a toString method
 		String line = "";
+		String pair = "";
 		int counter = 0;
 		
-		for(E elem : inputSet)
+		for(CountedElement<String> elem : inputSet)
 		{
-			line += "" + elem + ", ";
+			pair = elem.toString();
+			line += "" + pair + ", ";
 			if(counter==4)
 			{
 				line += "\n";
@@ -28,7 +29,7 @@ public class WordProcessor {
 			
 		return line;
 	}
-
+	
 	/**
 	 * @param args
 	 */
@@ -36,10 +37,12 @@ public class WordProcessor {
 		//create a set of type String called wordSet
 		Set<String> wordSet = new TreeSet<String>();
 		//create a set of type CountedElement<String> called countedWordSet 
-		Set<CountedElement<String>> countedWordSet = new TreeSet<CountedElement<String>>();
+		BSTBag<CountedElement<String>> countedWordSet = new BSTBag<CountedElement<String>>();
+		BSTBag<CountedElement<String>> countedWordSet2 = new BSTBag<CountedElement<String>>();
 		
+		
+		System.out.println("is empty: "+countedWordSet.isEmpty());
 		String word = "";
-		int  counter = 0;
 
 		//for each input file (assume 3 arguments, each the name of a file)
 		//  for each word w
@@ -65,29 +68,42 @@ public class WordProcessor {
 						{							
 							wordSet.add(word);				
 							countedWordSet.add(elem);
+							countedWordSet2.add(elem);
 					
 						}							
 						else
 						{						
-							counter = ((TreeSet<CountedElement<String>>) countedWordSet).ceiling(elem).getCount();
-							
-							CountedElement<String> incr = new CountedElement<String>(word,(counter+1));
-							
-							countedWordSet.remove(elem);
-							countedWordSet.add(incr);						
+							//Iterator<CountedElement<String>> iter = countedWordSet.iterator();
+							countedWordSet.add(elem);
+							countedWordSet2.add(elem);
+							/*while(iter.hasNext())
+							{
+								CountedElement<String> element = iter.next();
+								
+								if(element.compareTo(elem)==0)
+								{
+									element.setCount(element.getCount()+1);
+								}
+							}*/												
 						}
+						
 					}
 					
 					readfile.close();
+					
 					
 				}catch(IOException e)
 				{
 					System.err.println("File not found.");
 				}		
 			}
-				
-
-	System.out.println(displaySet(countedWordSet));
-
+		System.out.println("the size is: "+countedWordSet.size());		
+		CountedElement<String> elem = new CountedElement<String>("table",1);
+		countedWordSet.remove(elem);
+		System.out.println("Is countedWordSet equals to CountedWordSet2: "+countedWordSet.equals(countedWordSet2));
+		System.out.println("Does the set contains element (table,1): "+countedWordSet.contains(elem));
+		System.out.println("the size is: "+countedWordSet.size());
+		System.out.println("is empty: "+countedWordSet.isEmpty());
+		System.out.println(displaySet(countedWordSet));
 	}
 }
